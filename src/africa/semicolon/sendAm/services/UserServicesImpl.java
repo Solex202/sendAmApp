@@ -14,8 +14,8 @@ public class UserServicesImpl implements UserServices{
     private UserRepository userRepository = new UserRepositoryImpl();
     @Override
     public RegisterUserResponse register(RegisterUserRequest requestForm) {
-        requestForm.setEmailAddress(requestForm.getEmailAddress().toLowerCase());
         if(emailExists(requestForm.getEmailAddress())) throw new RegisterFailureException("Email is not valid");
+        requestForm.setEmailAddress(requestForm.getEmailAddress().toLowerCase());
         User user = new User(requestForm.getEmailAddress(), requestForm.getLastName() + " " + requestForm.getFirstName(), requestForm.getPhoneNumber());
 
         user.setAddress(requestForm.getAddress());
